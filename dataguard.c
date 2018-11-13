@@ -1,22 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <stdio.h>
-#include <stdlib.h>
-
 int main(void){
 
-    FILE *fileSl;
+    FILE *file;
     int opcao, qtdCol;
     int i, cont;
-    //unsigned int chavePrimaria;
-    char nomeTabela[50];
-    char **tamTabela;
+    char nomeTabela[50], **tamTabela;
 
     printf("\n\t=======================================\n");
     printf("\t=          DataGuard Stn Lee          =\n");
     printf("\t=======================================\n");
-
     //menu de opções
     printf("\n\t             Menu de Opções\n\n");
     printf("\t1 - Criar tabela\n");
@@ -27,13 +21,14 @@ int main(void){
     printf("\t6 - Apagar valor de uma tabela\n");
     printf("\t7 - Apagar uma tabela\n\n");
 
-    //implementar função "getch()" para ocultar o numero digitado
     fileSl = fopen("fileSl.txt", "w");
+    //implementar função "getch()" para ocultar o número da opção digitada.
     scanf("%i", &opcao);
     if(opcao == 1){
+        //Coleta parâmetros para proseguir com a criação da tabela.
         printf("Informe o nome da tabela a ser criada: ");
         scanf("%s", nomeTabela);
-        printf("Quantidade de colunas da tabela: ");
+        printf("Informe a quantidade de colunas da tabela: ");
         scanf("%i", &qtdCol);
         tamTabela = (char**)malloc(sizeof(char*)*qtdCol*2);
         for(i = 0; i < qtdCol*2; i++)
@@ -43,15 +38,16 @@ int main(void){
         fprintf(fileSl, "%s", tamTabela[0]);
     }
     cont = 1;
-       for(i = 0; i < qtdCol*2; i+=2){
-            printf("Informe o nome da %iª coluna: ", cont+1);
-            scanf("%s", tamTabela[i]);
-            fprintf(fileSl, "%s", tamTabela[i]);
-            printf("Insira o dado da %iª coluna: ", cont+1);
-            scanf("%s", tamTabela[i+1]);
-            fprintf(fileSl, "%s", tamTabela[i+1]);
-            cont++;
-        }
+    //Define os campos da tabela
+    for(i = 0; i < qtdCol*2; i+=2){
+        printf("Informe o nome da %iª coluna: ", cont+1);
+        scanf("%s", tamTabela[i]);
+        fprintf(fileSl, "%s", tamTabela[i]);
+        printf("Insira o dado da %iª coluna: ", cont+1);
+        scanf("%s", tamTabela[i+1]);
+        fprintf(fileSl, "%s", tamTabela[i+1]);
+        cont++;
+    }
     fclose(fileSl);
     
     //fprintf(fileSl, "%s", tamTabela[0]);
