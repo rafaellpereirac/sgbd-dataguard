@@ -3,7 +3,7 @@
 
 int main(void){
 
-    FILE *file;
+    FILE *fileSl;
     int opcao, qtdCol;
     int i, cont;
     char nomeTabela[50], **tamTabela;
@@ -30,36 +30,32 @@ int main(void){
         scanf("%s", nomeTabela);
         printf("Informe a quantidade de colunas da tabela: ");
         scanf("%i", &qtdCol);
-        tamTabela = (char**)malloc(sizeof(char*)*qtdCol*2);
-        for(i = 0; i < qtdCol*2; i++)
+        tamTabela = (char**)malloc(sizeof(char*)*qtdCol);
+        for(i = 0; i < qtdCol; i++)
             tamTabela[i] = (char*)malloc(sizeof(char)*50);
-        printf("Informe um ID para chave primária: ");
-        scanf("%s", tamTabela[0]);
-        fprintf(fileSl, "%s", tamTabela[0]);
+        //Define os campos da tabela.
+        cont = 1;
+        for(i = 0; i < qtdCol; i++){
+            printf("Informe o nome da %iª coluna: ", cont);
+            scanf("%s", tamTabela[i]);
+            fprintf(fileSl, "%s ", tamTabela[i]);
+            cont++;
+        }
+        fclose(fileSl);
+        printf("Tabela criada com sucesso.\n");
     }
-    cont = 1;
-    //Define os campos da tabela
-    for(i = 0; i < qtdCol*2; i+=2){
-        printf("Informe o nome da %iª coluna: ", cont+1);
-        scanf("%s", tamTabela[i]);
-        fprintf(fileSl, "%s", tamTabela[i]);
-        printf("Insira o dado da %iª coluna: ", cont+1);
-        scanf("%s", tamTabela[i+1]);
-        fprintf(fileSl, "%s", tamTabela[i+1]);
-        cont++;
-    }
-    fclose(fileSl);
-    
-    //fprintf(fileSl, "%s", tamTabela[0]);
-    /*
+    //Listar todas as tabelas.
     else if(opcao == 2){
-        printf("Listar todas as tabelas\n");
+        fileSl = fopen("fileSl.txt", "r");
+        if(fileSl == NULL)
+            printf("Não foi possivel abrir o arquivo\n");
+        else
+            fscanf(fileSl, "%s %s %s", tamTabela[0], tamTabela[1], tamTabela[2]);
     }
     else if(opcao == 3){
         printf("Criar uma nova linha na tabela\n");
     }
     else
         printf("Opção invalida\n");
-    */
     return 0;
 }
