@@ -3,7 +3,7 @@
 
 int main(void){
 
-    FILE *fileSl;
+    FILE *fileSl, *fileSt;
     int opcao, qtdCol;
     int i, cont;
     char nomeTabela[50], **tamTabela;
@@ -25,12 +25,15 @@ int main(void){
     //implementar função "getch()" para ocultar o número da opção digitada.
     scanf("%i", &opcao);
     do{
-        if(opcao == 1){
-            fileSl = fopen("fileSl.txt", "w");
+        if(opcao == 1){	
+			char listatabela[] = "listab.dsl";
+			//fileSl = fopen(nometabela, "w");
+			fileSl = fopen(listatabela, "w");
             //Coleta parâmetros para proseguir com a criação da tabela.
             printf("Informe o nome da tabela a ser criada: ");
-            scanf("%s", nomeTabela);
+			scanf("%s", nomeTabela);
             fprintf(fileSl, "%s\n", nomeTabela);
+			fileSt = fopen(nomeTabela, "w");
             printf("Informe a quantidade de colunas da tabela: ");
             scanf("%i", &qtdCol);
             tamTabela = (char**)malloc(sizeof(char*)*qtdCol);
@@ -58,7 +61,7 @@ int main(void){
         }
         //Listar todas as tabelas.
         else if(opcao == 2){
-            fileSl = fopen("fileSl.txt", "r");
+            fileSl = fopen(nomeTabela, "r");
             if(fileSl == NULL)
                 printf("Não foi possivel abrir o arquivo\n");
             else{
@@ -82,5 +85,4 @@ int main(void){
 
     return 0;
 }
-
 //excelsior
