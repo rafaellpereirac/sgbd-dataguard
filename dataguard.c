@@ -1,17 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(void){
 
-    FILE *fileSl, *fileSt;
-    int opcao, qtdCol;
-    int i, cont;
-    char nomeTabela[50], **tamTabela;
-
-    printf("\n\t=======================================\n");
+/*typedef struct {
+	printf("\n\t=======================================\n");
     printf("\t=          DataGuard Stn Lee          =\n");
     printf("\t=======================================\n");
-    //menu de opções
     printf("\n\t             Menu de Opções\n\n");
     printf("\t1 - Criar tabela\n");
     printf("\t2 - Listar todas as tabelas\n");
@@ -20,13 +14,38 @@ int main(void){
     printf("\t5 - Pesquisar valor em uma tabela\n");
     printf("\t6 - Apagar valor de uma tabela\n");
     printf("\t7 - Apagar uma tabela\n\n");
+				} menudsl;
+
+*/
+
+int main(void){
+
+    FILE *fileSl, *fileSt;
+    int opcao, qtdCol;
+    int i, cont;
+    char nomeTabela[50], **tamTabela;
+
+   
+    //menu de opções
+	printf("\n\t=======================================\n");
+    printf("\t=          DataGuard Stn Lee          =\n");
+    printf("\t=======================================\n");
+    printf("\n\t             Menu de Opções\n\n");
+    printf("\t1 - Criar tabela\n");
+    printf("\t2 - Listar todas as tabelas\n");
+    printf("\t3 - Criar uma nova linha na tabela\n");
+    printf("\t4 - Listar todos os dados de uma tabela\n");
+    printf("\t5 - Pesquisar valor em uma tabela\n");
+    printf("\t6 - Apagar valor de uma tabela\n");
+    printf("\t7 - Apagar uma tabela\n\n");
+    //printf(menudsl);
 
     printf("Escolha uma opção: ");
     //implementar função "getch()" para ocultar o número da opção digitada.
     scanf("%i", &opcao);
     do{
         if(opcao == 1){	
-			char listatabela[] = "listab.dsl";
+			char listatabela[] = "listab.txt";
 			//fileSl = fopen(nometabela, "w");
 			fileSl = fopen(listatabela, "w");
             //Coleta parâmetros para proseguir com a criação da tabela.
@@ -46,16 +65,19 @@ int main(void){
                 if(i == qtdCol-1){
                     printf("Informe o nome da %iª coluna: ", cont);
                     scanf("%s", tamTabela[i]);
-                    fprintf(fileSl, "%s\n", tamTabela[i]);
+                    //fprintf(fileSl, "%s\n", tamTabela[i]);
+					fprintf(fileSt, "%s\n", tamTabela[i]);
                 }
                 else{
                     printf("Informe o nome da %iª coluna: ", cont);
                     scanf("%s", tamTabela[i]);
-                    fprintf(fileSl, "%s ", tamTabela[i]);
+                    //fprintf(fileSl, "%s ", tamTabela[i]);
+					fprintf(fileSt, "%s ", tamTabela[i]);
                 }
                 cont++;
             }
             fclose(fileSl);
+			fclose(fileSt);
             printf("Tabela criada com sucesso.\n");
         //continue;
         }
@@ -65,8 +87,8 @@ int main(void){
             if(fileSl == NULL)
                 printf("Não foi possivel abrir o arquivo\n");
             else{
-                fscanf(fileSl, "%s\n%s %s %s", nomeTabela, tamTabela[0], tamTabela[1], tamTabela[2]);
-                printf("%s\n%s %s %s\n", nomeTabela, tamTabela[0], tamTabela[1], tamTabela[2]);
+                //fscanf(fileSl, "%s\n%s %s %s", nomeTabela, tamTabela[0], tamTabela[1], tamTabela[2]);
+                //printf("%s\n%s %s %s\n", nomeTabela, tamTabela[0], tamTabela[1], tamTabela[2]);
             }
             fclose(fileSl);
         }
