@@ -3,7 +3,7 @@
 
 int main(void){
 
-    FILE *fileSl;
+    FILE *fileSl, *fileTabelas;
     int opcao, qtdCol;
     int i, cont;
     char nomeTabela[50], **tamTabela;
@@ -26,11 +26,15 @@ int main(void){
     scanf("%i", &opcao);
     do{
         if(opcao == 1){
-            fileSl = fopen("fileSl.txt", "w");
             //Coleta parâmetros para proseguir com a criação da tabela.
             printf("Informe o nome da tabela a ser criada: ");
             scanf("%s", nomeTabela);
+            fileSl = fopen(nomeTabela, "w");
             fprintf(fileSl, "%s\n", nomeTabela);
+            //arquivo para armazenar apenas o nome das tabelas,
+            //para poder listar os nomes quando solicitado na opção 2.
+            fileTabelas = fopen("nomeTabela.dsl", "a");
+            fprintf(fileTabelas, "%s\n", nomeTabela);
             printf("Informe a quantidade de colunas da tabela: ");
             scanf("%i", &qtdCol);
             tamTabela = (char**)malloc(sizeof(char*)*qtdCol);
@@ -53,19 +57,17 @@ int main(void){
                 cont++;
             }
             fclose(fileSl);
+            fclose(fileTabelas);
             printf("Tabela criada com sucesso.\n");
-        //continue;
         }
         //Listar todas as tabelas.
         else if(opcao == 2){
-            fileSl = fopen("fileSl.txt", "r");
+            fileTabelas = fopen("nomeTabela.dsl", "r");
             if(fileSl == NULL)
-                printf("Não foi possivel abrir o arquivo\n");
-            else{
-                fscanf(fileSl, "%s\n%s %s %s", nomeTabela, tamTabela[0], tamTabela[1], tamTabela[2]);
-                printf("%s\n%s %s %s\n", nomeTabela, tamTabela[0], tamTabela[1], tamTabela[2]);
-            }
-            fclose(fileSl);
+                printf("Não foi possivel abrir o arquivo.\n");
+            while(fgets(nomeTabela, 50, fileTabelas) != NULL)
+                printf("%s", nomeTabela);
+            fclose(fileTabelas);
         }
         /*
         else if(opcao == 3){
