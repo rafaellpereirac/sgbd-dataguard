@@ -6,7 +6,7 @@ int main(void){
     FILE *fileSl, *fileTabelas;
     int opcao, qtdCol;
     int i, cont;
-    char nomeTabela[50], **tamTabela;
+    char nomeTabela[50], buscaTabela[50], checkBusca[50], **tamTabela;
 
     printf("\n\t=======================================\n");
     printf("\t=          DataGuard Stn Lee          =\n");
@@ -30,7 +30,6 @@ int main(void){
             printf("Informe o nome da tabela a ser criada: ");
             scanf("%s", nomeTabela);
             fileSl = fopen(nomeTabela, "w");
-            fprintf(fileSl, "%s\n", nomeTabela);
             //arquivo para armazenar apenas o nome das tabelas,
             //para poder listar os nomes quando solicitado na opção 2.
             fileTabelas = fopen("nomeTabela.dsl", "a");
@@ -69,12 +68,20 @@ int main(void){
                 printf("%s", nomeTabela);
             fclose(fileTabelas);
         }
+        //Criar uma nova linha na tabela. 
         /*
         else if(opcao == 3){
-            Criar uma nova linha na tabela\n
+            printf("Informe o nome da tabela: ");
+            scanf("%s", buscaTabela);
+            fileSl = fopen(buscaTabela, "r");
+            while(fgets(checkBusca, 50, fileSl) != NULL){
+                printf("Informe o valor da coluna %s :", checkBusca);
+                scanf("%s\n", nomeTabela);
+                fileSl = fopen(buscaTabela, "a");
+                fprintf(fileSl, "%s ", buscaTabela);
+            fclose(fileSl);
+            }
         }
-        else
-            printf("Opção invalida\n");
         */
         printf("Escolha uma opção: ");
         scanf("%i", &opcao);
