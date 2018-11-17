@@ -51,7 +51,7 @@ int main(void){
                 else{
                     printf("Informe o nome da %iª coluna: ", cont);
                     scanf("%s", tamTabela[i]);
-                    fprintf(fileSl, "%s ", tamTabela[i]);
+                    fprintf(fileSl, "%s\n", tamTabela[i]);
                 }
                 cont++;
             }
@@ -69,20 +69,18 @@ int main(void){
             fclose(fileTabelas);
         }
         //Criar uma nova linha na tabela. 
-        /*
         else if(opcao == 3){
             printf("Informe o nome da tabela: ");
             scanf("%s", buscaTabela);
             fileSl = fopen(buscaTabela, "r");
-            while(fgets(checkBusca, 50, fileSl) != NULL){
-                printf("Informe o valor da coluna %s :", checkBusca);
+            while(fgets(checkBusca, 50, fileSl) != NULL){      
+                printf("Informe o valor da coluna %s", checkBusca);
                 scanf("%s\n", nomeTabela);
                 fileSl = fopen(buscaTabela, "a");
-                fprintf(fileSl, "%s ", buscaTabela);
+                fprintf(fileSl, "%s\n", nomeTabela);
             fclose(fileSl);
             }
         }
-        */
         printf("Escolha uma opção: ");
         scanf("%i", &opcao);
     }while(opcao != 0);
