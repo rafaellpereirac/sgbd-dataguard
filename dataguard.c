@@ -23,7 +23,7 @@ int main(void){
     FILE *fileSl, *fileTabelas;
     int opcao, qtdCol;
     int i, cont;
-    char nomeTabela[50], **tamTabela, buscatabela;
+    char nomeTabela[50], **tamTabela, *buscaTabela;
 
     printf("\n\t=======================================\n");
     printf("\t=          DataGuard Stn Lee          =\n");
@@ -87,8 +87,8 @@ int main(void){
             fclose(fileTabelas);
         }
         //Criar uma nova linha na tabela. 
-        /*
-		char = buscatabela;
+     
+		/*
         else if(opcao == 3){
             printf("Informe o nome da tabela: ");
             scanf("%s", buscaTabela);
@@ -102,11 +102,11 @@ int main(void){
                 fprintf(fileSl, "%s ", buscaTabela);
                 fprintf(fileSl, "%s\n", nomeTabela);
             fclose(fileSl);
-            }
+            } 
         }
         */
 		//listar todos os dados de uma tabela.
-		else if(opcao == 4){
+		/*else if(opcao == 4){
 			printf("Informe o nome da tabela a ser listada: ");
 			scanf("%s", buscaTabela);
 			fileTabelas = fopen("", "r");
@@ -116,7 +116,7 @@ int main(void){
 
 					printf("%s", fileTabelas);
             fclose(fileTabelas);
-
+*/
         printf("Escolha uma opção: ");
         scanf("%i", &opcao);
     }while(opcao != 0);
