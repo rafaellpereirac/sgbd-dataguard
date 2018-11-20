@@ -36,7 +36,10 @@ int main(void){
     printf("\t4 - Listar todos os dados de uma tabela\n");
     printf("\t5 - Pesquisar valor em uma tabela\n");
     printf("\t6 - Apagar valor de uma tabela\n");
-    printf("\t7 - Apagar uma tabela\n\n");
+    printf("\t7 - Apagar uma tabela\n");
+	printf("\t8 - Ajuda\n\n");
+	printf("\t0 - Finalizar o programa\n\n");
+	
 
     printf("Escolha uma opção: ");
     //implementar função "getch()" para ocultar o número da opção digitada.
@@ -107,18 +110,21 @@ int main(void){
 			scanf("%s", buscaTabela);
 			fileSl = fopen(buscaTabela, "r");
 			if(fileSl == NULL)
-                 printf("Não foi possivel abrir o arquivo.\n");
+                 printf("Tabela não encontrada, por favor, verifique o nome digitado.\n");
 			while(fgets(checkBusca, 50, fileSl) != NULL)
 					printf("%s", checkBusca);
             fclose(fileSl);
 		}
+		/*else if(opcao == 8){
+		}*/
         printf("Escolha uma opção: ");
         scanf("%i", &opcao);
+	//Finalização do programa
     }while(opcao != 0);
      if(opcao == 0)
-         printf("Finalizando programa...\n");
+         printf("Finalizando programa...\nEXCELSIOR!\n");
  
      return 0;
 }
 //excelsior
-//Com Grandes Poderes vem Grandes
+//Com Grandes Poderes vem Grandes Responsabilidades
