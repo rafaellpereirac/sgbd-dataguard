@@ -34,8 +34,8 @@ int main(void){
     printf("\t5 - Pesquisar valor em uma tabela\n");
     printf("\t6 - Apagar valor de uma tabela\n");
     printf("\t7 - Apagar uma tabela\n");
-	  printf("\t8 - Ajuda\n\n");
-	  printf("\t0 - Finalizar o programa\n\n");
+	printf("\t8 - Ajuda\n\n");
+	printf("\t0 - Finalizar o programa\n\n");
 
     printf("Escolha uma opção: ");
     //implementar função "getch()" para ocultar o número da opção digitada.
@@ -112,12 +112,12 @@ int main(void){
         fclose(fileSl);
 		}
 		//Opção ajuda, para listar novamente o menu.
-    /*
-    else if(opcao == 8){
+        /*
+        else if(opcao == 8){
 		}*/
     printf("Escolha uma opção: ");
     scanf("%i", &opcao);
-	  //Finalização do programa
+	//Finalização do programa
     }while(opcao != 0);
     if(opcao == 0)
         printf("Finalizando programa...\nEXCELSIOR!\n");
