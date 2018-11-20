@@ -1,6 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*typedef struct menudsl{
+	printf("\n\t=======================================\n");
+    printf("\t=          DataGuard Stn Lee          =\n");
+    printf("\t=======================================\n");
+    printf("\n\t             Menu de Opções\n\n");
+    printf("\t1 - Criar tabela\n");
+    printf("\t2 - Listar todas as tabelas\n");
+    printf("\t3 - Criar uma nova linha na tabela\n");
+    printf("\t4 - Listar todos os dados de uma tabela\n");
+    printf("\t5 - Pesquisar valor em uma tabela\n");
+    printf("\t6 - Apagar valor de uma tabela\n");
+    printf("\t7 - Apagar uma tabela\n\n");
+				} menudsl;
+*/
 int main(void){
 
     FILE *fileSl, *fileTabelas;
@@ -19,7 +33,9 @@ int main(void){
     printf("\t4 - Listar todos os dados de uma tabela\n");
     printf("\t5 - Pesquisar valor em uma tabela\n");
     printf("\t6 - Apagar valor de uma tabela\n");
-    printf("\t7 - Apagar uma tabela\n\n");
+    printf("\t7 - Apagar uma tabela\n");
+	  printf("\t8 - Ajuda\n\n");
+	  printf("\t0 - Finalizar o programa\n\n");
 
     printf("Escolha uma opção: ");
     //implementar função "getch()" para ocultar o número da opção digitada.
@@ -51,7 +67,7 @@ int main(void){
                 else{
                     printf("Informe o nome da %iª coluna: ", cont);
                     scanf("%s", tamTabela[i]);
-                    fprintf(fileSl, "%s\n", tamTabela[i]);
+                    fprintf(fileSl, "%s ", tamTabela[i]);
                 }
                 cont++;
             }
@@ -75,17 +91,38 @@ int main(void){
             fileSl = fopen(buscaTabela, "r");
             while(fgets(checkBusca, 50, fileSl) != NULL){      
                 printf("Informe o valor da coluna %s", checkBusca);
+                fclose(fileSl);
                 scanf("%s\n", nomeTabela);
                 fileSl = fopen(buscaTabela, "a");
                 fprintf(fileSl, "%s\n", nomeTabela);
+                fclose(fileSl);
+                fileSl = fopen(buscaTabela, "r");
             fclose(fileSl);
             }
         }
-        printf("Escolha uma opção: ");
-        scanf("%i", &opcao);
+		//listar todos os dados de uma tabela.
+		else if(opcao == 4){
+        printf("Informe o nome da tabela a ser listada: ");
+        scanf("%s", buscaTabela);
+        fileSl = fopen(buscaTabela, "r");
+        if(fileSl == NULL)
+            printf("Tabela não encontrada, por favor, verifique o nome digitado.\n");
+        while(fgets(checkBusca, 50, fileSl) != NULL)
+            printf("%s", checkBusca);
+        fclose(fileSl);
+		}
+		//Opção ajuda, para listar novamente o menu.
+    /*
+    else if(opcao == 8){
+		}*/
+    printf("Escolha uma opção: ");
+    scanf("%i", &opcao);
+	  //Finalização do programa
     }while(opcao != 0);
     if(opcao == 0)
-        printf("Finalizando programa...\n");
-
+        printf("Finalizando programa...\nEXCELSIOR!\n");
+ 
     return 0;
 }
+//excelsior
+//Com Grandes Poderes vem Grandes Responsabilidades
