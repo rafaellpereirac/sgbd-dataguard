@@ -93,8 +93,11 @@ int main(void){
             while(fgets(checkBusca, 50, fileSl) != NULL){      
                 printf("Informe o valor da coluna %s", checkBusca);
                 scanf("%s\n", nomeTabela);
+				fclose(fileSl);
                 fileSl = fopen(buscaTabela, "a");
                 fprintf(fileSl, "%s\n", nomeTabela);
+				fclose(fileSl);
+				fileSl = fopen(buscaTabela, "r");
             fclose(fileSl);
             }
         }
@@ -118,3 +121,4 @@ int main(void){
      return 0;
 }
 //excelsior
+//Com Grandes Poderes vem Grandes
