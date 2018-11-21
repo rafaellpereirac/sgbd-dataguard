@@ -17,7 +17,7 @@
 */
 int main(void){
 
-    FILE *fileSl, *fileTabelas;
+    FILE *fileSl, *fileAdd, *fileTabelas;
     int opcao, qtdCol;
     int i, cont;
     char nomeTabela[50], buscaTabela[50], checkBusca[50], **tamTabela;
@@ -67,7 +67,7 @@ int main(void){
                 else{
                     printf("Informe o nome da %iª coluna: ", cont);
                     scanf("%s", tamTabela[i]);
-                    fprintf(fileSl, "%s ", tamTabela[i]);
+                    fprintf(fileSl, "%s\n", tamTabela[i]);
                 }
                 cont++;
             }
@@ -91,14 +91,12 @@ int main(void){
             fileSl = fopen(buscaTabela, "r");
             while(fgets(checkBusca, 50, fileSl) != NULL){      
                 printf("Informe o valor da coluna %s", checkBusca);
-                fclose(fileSl);
-                scanf("%s\n", nomeTabela);
-                fileSl = fopen(buscaTabela, "a");
-                fprintf(fileSl, "%s\n", nomeTabela);
-                fclose(fileSl);
-                fileSl = fopen(buscaTabela, "r");
-            fclose(fileSl);
+                scanf("%s", nomeTabela);
+                fileAdd = fopen("buscaTabela", "a");
+                fprintf(fileAdd, "%s\n", nomeTabela);
             }
+            fclose(fileSl);
+            fclose(fileAdd);
         }
 		//listar todos os dados de uma tabela.
 		else if(opcao == 4){
@@ -115,12 +113,12 @@ int main(void){
         /*
         else if(opcao == 8){
 		}*/
-    printf("Escolha uma opção: ");
-    scanf("%i", &opcao);
-	//Finalização do programa
-    }while(opcao != 0);
-    if(opcao == 0)
-        printf("Finalizando programa...\nEXCELSIOR!\n");
+        printf("Escolha uma opção: ");
+        scanf("%i", &opcao);
+    	//Finalização do programa
+        }while(opcao != 0);
+        if(opcao == 0)
+            printf("Finalizando programa...\nEXCELSIOR!\n");
  
     return 0;
 }
