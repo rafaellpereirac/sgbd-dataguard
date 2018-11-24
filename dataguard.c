@@ -92,7 +92,7 @@ int main(void){
             while(fgets(checkBusca, 50, fileSl) != NULL){      
                 printf("Informe o valor da coluna %s", checkBusca);
                 scanf("%s", nomeTabela);
-                fileAdd = fopen("buscaTabela", "a");
+                fileAdd = fopen("refBuscaTabela", "a");
                 fprintf(fileAdd, "%s\n", nomeTabela);
             }
             fclose(fileSl);
@@ -102,7 +102,7 @@ int main(void){
 		else if(opcao == 4){
         printf("Informe o nome da tabela a ser listada: ");
         scanf("%s", buscaTabela);
-        fileSl = fopen(buscaTabela, "r");
+        fileSl = fopen("refBuscaTabela", "r");
         if(fileSl == NULL)
             printf("Tabela não encontrada, por favor, verifique o nome digitado.\n");
         while(fgets(checkBusca, 50, fileSl) != NULL)
