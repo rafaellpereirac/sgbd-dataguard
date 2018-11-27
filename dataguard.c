@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /*typedef struct menudsl{
 	printf("\n\t=======================================\n");
@@ -18,7 +19,7 @@
 int main(void){
 
     FILE *fileSl, *fileAdd, *fileTabelas;
-    int opcao, qtdCol;
+    int opcao, opca2, qtdCol;
     int i, cont;
     char nomeTabela[50], buscaTabela[50], checkBusca[50], **tamTabela;
 
@@ -33,7 +34,7 @@ int main(void){
     printf("\t4 - Listar todos os dados de uma tabela\n");
     printf("\t5 - Pesquisar valor em uma tabela\n");
     printf("\t6 - Apagar valor de uma tabela\n");
-    printf("\t7 - Apagar uma tabela\n");
+    printf("\t7 - Apagar uma tabela\n");\
 	printf("\t8 - Ajuda\n\n");
 	printf("\t0 - Finalizar o programa\n\n");
 
@@ -89,14 +90,19 @@ int main(void){
             printf("Informe o nome da tabela: ");
             scanf("%s", buscaTabela);
             fileSl = fopen(buscaTabela, "r");
+			char * arq_dados = malloc( sizeof(char) * (strlen(buscaTabela)+15));
+			strcpy( arq_dados, buscaTabela);
+			strcat( arq_dados, ".data" );
             while(fgets(checkBusca, 50, fileSl) != NULL){      
                 printf("Informe o valor da coluna %s", checkBusca);
                 scanf("%s", nomeTabela);
-                fileAdd = fopen("refBuscaTabela", "a");
+                fileAdd = fopen(arq_dados, "a");
                 fprintf(fileAdd, "%s\n", nomeTabela);
             }
             fclose(fileSl);
             fclose(fileAdd);
+
+// acao.data
         }
 		//listar todos os dados de uma tabela.
 		else if(opcao == 4){
@@ -109,6 +115,48 @@ int main(void){
             printf("%s", checkBusca);
         fclose(fileSl);
 		}
+		//buscar item na tabela.
+		/*else if(opcao == 5){
+		printf("Informe o nome da tabela: ");
+            scanf("%s", buscaTabela);
+			if(fileSl == NULL)
+				printf("Tabela não encontrada, por favor, verifique o nome digitado.\n");
+			else{ 
+			double valorPesquisa;
+            fileSl = fopen(buscaTabela, "r");
+				fprintf(fileSl, "%s ", buscaTabela);
+				printf("Informe a coluna a ser pesquizado: ");
+					scanf("%s", checkBusca);   
+                    printf("\t1 - Valores maior que o valor informado\n");
+    				printf("\t2 - Valores maior ou igual que o valor informado\n");
+    				printf("\t3 - Valores igual o valor informado\n");
+    				printf("\t4 - Valores menor que o valor informado\n");
+    				printf("\t5 - Valores menor ou igual que o valor informado\n");
+    				printf("\t6 - Valores próximos ao valor informado\n");
+    				printf("\t7 - Apagar uma tabela\n");
+					if(opcao2 == 1){
+						printf("Informe um valor numérico a ser pesquisado: ");
+						scanf("%i", &valorPesquisa);
+
+		//apaga o valor de umatabela.
+		else if(opcao == 6){
+						   
+						   }
+
+
+		//apaga uma tabela.
+		else if(opcao == 7){
+
+						   }
+						
+					}
+            }
+		}
+            fclose(fileSl);
+			fclose(fileAdd);
+					
+
+		
 		//Opção ajuda, para listar novamente o menu.
         /*
         else if(opcao == 8){
