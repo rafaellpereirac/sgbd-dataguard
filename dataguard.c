@@ -9,22 +9,12 @@ int main(void){
 	int i, cont;
 	char nomeTabela[50], buscaTabela[50], checkBusca[50], **tamTabela, *busca;
 	char *valorPesquisa;
-
-	printf("\n\t=======================================\n");
-	printf("\t=      	DataGuard Stn Lee      	=\n");
-	printf("\t=======================================\n");
-	//menu de opções
-	printf("\n\t         	Menu de Opções\n\n");
-	printf("\t1 - Criar tabela\n");
-	printf("\t2 - Listar todas as tabelas\n");
-	printf("\t3 - Criar uma nova linha na tabela\n");
-	printf("\t4 - Listar todos os dados de uma tabela\n");
-	printf("\t5 - Pesquisar valor em uma tabela\n");
-	printf("\t6 - Apagar valor de uma tabela\n");
-	printf("\t7 - Apagar uma tabela\n");\
-	printf("\t8 - Ajuda\n\n");
-	printf("\t0 - Finalizar o programa\n\n");
-
+    char arqVal[100];
+    //declaração das funções
+    void menu(void);
+    char *concatenaArquivo(char *arqBase);
+    
+    menu();
 	printf("Escolha uma opção: ");
 	//implementar função "getch()" para ocultar o número da opção digitada.
 	scanf("%i", &opcao);
@@ -47,21 +37,13 @@ int main(void){
         	printf("A 1ª coluna armazerá a chave primária.\n");
         	cont = 1;
         	for(i = 0; i < qtdCol; i++){
-            	if(i == qtdCol-1){
-                	printf("Informe o nome da %iª coluna: ", cont);
-                	scanf("%s", tamTabela[i]);
-                	fprintf(fileSl, "%s\n", tamTabela[i]);
-            	}
-            	else{
-                	printf("Informe o nome da %iª coluna: ", cont);
-                	scanf("%s", tamTabela[i]);
-                	fprintf(fileSl, "%s\n", tamTabela[i]);
-            	}
-            	cont++;
+                printf("Informe o nome da %iª coluna: ", cont);
+                scanf("%s", tamTabela[i]);
+            	fprintf(fileSl, "%s\n", tamTabela[i]);
         	}
         	fclose(fileSl);
         	fclose(fileTabelas);
-        	printf("Tabela criada com sucesso.\n");
+        	printf("Tabela criada com sucesso.\n\n");
     	}
     	//Listar todas as tabelas.
     	else if(opcao == 2){
@@ -71,24 +53,26 @@ int main(void){
         	while(fgets(nomeTabela, 50, fileTabelas) != NULL)
             	printf("%s", nomeTabela);
         	fclose(fileTabelas);
+            printf("\n");
     	}
     	//Criar uma nova linha na tabela.
     	else if(opcao == 3){
         	printf("Informe o nome da tabela: ");
         	scanf("%s", buscaTabela);
         	fileSl = fopen(buscaTabela, "r");
+            //concatenaArquivo(buscaTabela);
         	char *arq_dados = malloc(sizeof(char) *(strlen(buscaTabela)+15));
         	strcpy(arq_dados, buscaTabela);
-        	strcat(arq_dados, ".data");
-        	fileAdd = fopen(arq_dados, "a");
+        	strcat(arq_dados, ".val");
+        	fileAdd = fopen(arqVal, "a");
         	while(fgets(checkBusca, 50, fileSl) != NULL){ 	 
             	printf("Informe o valor da coluna %s", checkBusca);
             	scanf("%s", nomeTabela);
             	fprintf(fileAdd, "%s ", nomeTabela);
         	}
-        	printf("\n");
         	fclose(fileSl);
         	fclose(fileAdd);
+            printf("\n");
     	}
     	//listar todos os dados de uma tabela.
     	else if(opcao == 4){
@@ -96,7 +80,7 @@ int main(void){
         	scanf("%s", buscaTabela);
         	char *arq_dados = malloc(sizeof(char) *(strlen(buscaTabela)+15));
         	strcpy(arq_dados, buscaTabela);
-        	strcat(arq_dados, ".data");
+        	strcat(arq_dados, ".val");
         	fileSl = fopen(arq_dados, "r");
         	if(fileSl == NULL)
             	printf("Tabela não encontrada, por favor, verifique o nome digitado.\n");
@@ -137,7 +121,7 @@ int main(void){
         	scanf("%s", valorPesquisa);
         	char *arq_dados = malloc(sizeof(char) *(strlen(buscaTabela)+15));
         	strcpy(arq_dados, buscaTabela);
-        	strcat(arq_dados, ".data");
+        	strcat(arq_dados, ".val");
         	fileSl = fopen(arq_dados, "r");
         	while(fgets(checkBusca, 50, fileSl) != NULL){
             	busca = strstr(checkBusca, valorPesquisa);
@@ -168,7 +152,7 @@ int main(void){
         	scanf("%s", buscaTabela);
         	char *arq_dados = malloc(sizeof(char) *(strlen(buscaTabela)+15));
         	strcpy(arq_dados, buscaTabela);
-        	strcat(arq_dados, ".data");
+        	strcat(arq_dados, ".val");
         	fileSl = fopen(buscaTabela, "r");
         	if(fileSl == NULL)
             	printf("Tabela não encontrada, por favor, verifique o nome digitado.\n");
@@ -188,5 +172,30 @@ int main(void){
  
 	return 0;
 }
+//menu de opções
+void menu(void){
 
+    printf("\n\t=======================================\n");
+    printf("\t=         DataGuard Stn Lee       =\n");
+    printf("\t=======================================\n");
+    
+    printf("\n\t            Menu de Opções\n\n");
+    printf("\t1 - Criar tabela\n");
+    printf("\t2 - Listar todas as tabelas\n");
+    printf("\t3 - Criar uma nova linha na tabela\n");
+    printf("\t4 - Listar todos os dados de uma tabela\n");
+    printf("\t5 - Pesquisar valor em uma tabela\n");
+    printf("\t6 - Apagar valor de uma tabela\n");
+    printf("\t7 - Apagar uma tabela\n");\
+    printf("\t8 - Ajuda\n\n");
+    printf("\t0 - Finalizar o programa\n\n");
+}
 
+char *concatenaArquivo(char *arqBase){
+
+    char *arqVal = malloc(sizeof(char) *(strlen(arqBase)+15));
+    strcpy(arqVal, arqBase);
+    strcat(arqVal, ".val");
+
+    return(arqVal);
+}
