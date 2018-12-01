@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+//#include <excelsior.h>
+//lembrar de implematar função
 
 int main(void){
 
@@ -12,7 +14,8 @@ int main(void){
     char arqVal[100];
     //declaração das funções
     void menu(void);
-    char *concatenaArquivo(char *arqBase);
+    void menuBusca(void);
+    void concatenaArquivo(char *arqBase, char arqVal[]);
     int abreArquivo(char arquivo[]);
     
     menu();
@@ -61,10 +64,7 @@ int main(void){
             printf("Informe o nome da tabela: ");
             scanf("%s", buscaTabela);
             fileSl = fopen(buscaTabela, "r");
-            //concatenaArquivo(buscaTabela);
-            char *arq_dados = malloc(sizeof(char) *(strlen(buscaTabela)+15));
-            strcpy(arq_dados, buscaTabela);
-            strcat(arq_dados, ".val");
+            concatenaArquivo(buscaTabela, arqVal);
             fileAdd = fopen(arqVal, "a");
             while(fgets(checkBusca, 50, fileSl) != NULL){    
                 printf("Informe o valor da coluna %s", checkBusca);
@@ -79,10 +79,8 @@ int main(void){
         else if(opcao == 4){
             printf("Informe o nome da tabela a ser listada: ");
             scanf("%s", buscaTabela);
-            char *arq_dados = malloc(sizeof(char) *(strlen(buscaTabela)+15));
-            strcpy(arq_dados, buscaTabela);
-            strcat(arq_dados, ".val");
-            fileSl = fopen(arq_dados, "r");
+            concatenaArquivo(buscaTabela, arqVal);
+            fileSl = fopen(arqVal, "r");
             if(fileSl == NULL)
                 printf("Tabela não encontrada, por favor, verifique o nome digitado.\n");
             while(fgets(checkBusca, 50, fileSl) != NULL)
@@ -105,13 +103,7 @@ int main(void){
                     printf("%s", checkBusca);
                 printf("Informe a coluna a ser pesquisado: ");
                 scanf("%s", checkBusca);
-                //Menu de opçoes para busca   
-                printf("\t1 - Valores maior que o valor informado\n");
-                printf("\t2 - Valores maior ou igual que o valor informado\n");
-                printf("\t3 - Valores igual o valor informado\n");
-                printf("\t4 - Valores menor que o valor informado\n");
-                printf("\t5 - Valores menor ou igual que o valor informado\n");
-                printf("\t6 - Valores próximos ao valor informado\n");
+                menuBusa();
                 fclose(fileSl);
                 printf("\n");
             }
@@ -130,14 +122,8 @@ int main(void){
                     printf("%s\n", busca);
                 }
             }
-            //if(strcmp(valorPesquisa, "palavra na tabela")){
-            //  printf("O termo pesquisado está na tabela.");
-            //}
-            //else{
-            //  printf("O termo pesquisado não está na tabela.");
-            //}
-        }
-        */    
+        } 
+        */  
         else if(opcao == 6){
 
             printf("Informe a linha a ser apagada: ");
@@ -147,9 +133,7 @@ int main(void){
         else if(opcao == 7){
             printf("Informe o nome da tabela ser apagada: ");
             scanf("%s", buscaTabela);
-            char *arq_dados = malloc(sizeof(char) *(strlen(buscaTabela)+15));
-            strcpy(arq_dados, buscaTabela);
-            strcat(arq_dados, ".val");
+            concatenaArquivo(buscaTabela, arqVal);
             fileSl = fopen(buscaTabela, "r");
             if(fileSl == NULL)
                 printf("Tabela não encontrada, por favor, verifique o nome digitado.\n");
@@ -187,14 +171,24 @@ void menu(void){
     printf("\t8 - Ajuda\n\n");
     printf("\t0 - Finalizar o programa\n\n");
 }
+//Menu de opçoes para busca
+void menuBusca(void){
+   
+    printf("\t1 - Valores maior que o valor informado\n");
+    printf("\t2 - Valores maior ou igual que o valor informado\n");
+    printf("\t3 - Valores igual o valor informado\n");
+    printf("\t4 - Valores menor que o valor informado\n");
+    printf("\t5 - Valores menor ou igual que o valor informado\n");
+    printf("\t6 - Valores próximos ao valor informado\n\n");
 
-char *concatenaArquivo(char *arqBase){
+}
 
-    char *arqVal = malloc(sizeof(char) *(strlen(arqBase)+15));
+void concatenaArquivo(char *arqBase, char arqVal[]){
+
+    //char *arqVal = malloc(sizeof(char) *(strlen(arqBase)+15));
     strcpy(arqVal, arqBase);
     strcat(arqVal, ".val");
 
-    return(arqVal);
 }
 
 int abreArquivo(char buscaTabela[]){
@@ -234,3 +228,6 @@ int abreArquivo(char buscaTabela[]){
     fclose(arqEntrada);
     fclose(arqSaida);
 }
+
+
+
