@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include <excelsior.h>
-//lembrar de implematar função
+#include "funcoes.h"
 
 int main(void){
 
@@ -13,10 +12,10 @@ int main(void){
     char *valorPesquisa;
     char arqVal[100];
     //declaração das funções
-    void menu(void);
-    void menuBusca(void);
-    void concatenaArquivo(char *arqBase, char arqVal[]);
-    int abreArquivo(char arquivo[]);
+    //void menu(void);
+    //void menuBusca(void);
+    //void concatenaArquivo(char *arqBase, char arqVal[]);
+    //int abreArquivo(char arquivo[]);
     
     menu();
     printf("Escolha uma opção: ");
@@ -71,6 +70,7 @@ int main(void){
                 scanf("%s", nomeTabela);
                 fprintf(fileAdd, "%s ", nomeTabela);
             }
+            fprintf(fileAdd, "\n");
             fclose(fileSl);
             fclose(fileAdd);
             printf("\n");
@@ -126,9 +126,10 @@ int main(void){
         */  
         else if(opcao == 6){
 
-            printf("Informe a linha a ser apagada: ");
+            printf("Informe o nome da tabela: ");
             scanf("%s", buscaTabela);
-            abreArquivo(buscaTabela);
+            concatenaArquivo(buscaTabela, arqVal);
+            abreArquivo(arqVal);
         }
         else if(opcao == 7){
             printf("Informe o nome da tabela ser apagada: ");
@@ -139,7 +140,7 @@ int main(void){
                 printf("Tabela não encontrada, por favor, verifique o nome digitado.\n");
             else{
                 remove(buscaTabela);
-                remove(arq_dados);
+                remove(arqVal);
                 printf("Tabela %s apagada com sucesso.", buscaTabela);
             }
             printf("\n");
@@ -153,6 +154,7 @@ int main(void){
  
     return 0;
 }
+/*
 //menu de opções
 void menu(void){
 
@@ -207,7 +209,7 @@ int abreArquivo(char buscaTabela[]){
     }
     char *arq_dados = malloc(sizeof(char) *(strlen(buscaTabela)+15));
     strcpy(arq_dados, buscaTabela);
-    strcat(arq_dados, ".val");
+    strcat(arq_dados, ".del");
     if((arqSaida = fopen(arq_dados, "w")) == 0){
         printf("Impossivel abrir arquivo...\n");
     }
@@ -228,6 +230,4 @@ int abreArquivo(char buscaTabela[]){
     fclose(arqEntrada);
     fclose(arqSaida);
 }
-
-
-
+*/
