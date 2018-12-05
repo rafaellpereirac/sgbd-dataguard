@@ -8,6 +8,6 @@ void menuBusca(void);
 //adicionar extensao ao nome do arquivo base
 void concatenaArquivo(char *arqBase, char arqVal[]);
 //remover linha
-int abreArquivo(char arquivo[]);
+int removeLinha(char arquivo[]);
 
 #endif

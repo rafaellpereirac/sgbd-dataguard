@@ -41,7 +41,7 @@ void concatenaArquivo(char *arqBase, char arqVal[]){
 
 }
 
-int abreArquivo(char buscaTabela[]){
+int removeLinha(char buscaTabela[]){
     
     FILE *arqEntrada;
     FILE *arqSaida;
@@ -61,7 +61,7 @@ int abreArquivo(char buscaTabela[]){
     if((arqSaida = fopen(arq_dados, "w")) == 0){
         printf("Impossivel abrir arquivo...\n");
     }
-    printf("Digite a linha a ser apagada no arquivo: ");
+    printf("Informe o numero da linha a ser apagada no arquivo: ");
     scanf("%d", &line);
     rewind(arqEntrada);
     for(i = 0; !feof(arqEntrada);i++){
@@ -74,7 +74,9 @@ int abreArquivo(char buscaTabela[]){
         }
         linha = linha + 1;
         fputs(textoArquivo, arqSaida);
-    }
+    	
+	}
     fclose(arqEntrada);
     fclose(arqSaida);
+	printf("Linha removida com sucesso!\n");
 }

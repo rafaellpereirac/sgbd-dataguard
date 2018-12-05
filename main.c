@@ -36,8 +36,9 @@ int main(void){
             cont = 1;
             for(i = 0; i < qtdCol; i++){
                 printf("Informe o nome da %iª coluna: ", cont);
-                scanf("%s", tamTabela[i]);
+				scanf("%s", tamTabela[i]);
                 fprintf(fileSl, "%s\n", tamTabela[i]);
+				cont++;
             }
             fclose(fileSl);
             fclose(fileTabelas);
@@ -75,6 +76,7 @@ int main(void){
             printf("Informe o nome da tabela a ser listada: ");
             scanf("%s", buscaTabela);
             concatenaArquivo(buscaTabela, arqVal);
+				//if
             fileSl = fopen(arqVal, "r");
             if(fileSl == NULL)
                 printf("Tabela não encontrada, por favor, verifique o nome digitado.\n");
@@ -124,7 +126,7 @@ int main(void){
             printf("Informe o nome da tabela: ");
             scanf("%s", buscaTabela);
             concatenaArquivo(buscaTabela, arqVal);
-            abreArquivo(arqVal);
+            removeLinha(arqVal);
         }
         else if(opcao == 7){
             printf("Informe o nome da tabela ser apagada: ");
